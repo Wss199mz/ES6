@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" id="ta">
+<script>
+    var textarea = document.getElementById('ta');
+    var timeoutId;
+    var firstTime = true
+    var fn = function () {
+        console.log(1)
+    }
+    textarea.addEventListener('keyup',function(){
+        if (firstTime) {
+            fn()
+            return firstTime = false
+        }
+        if (timeoutId) {    // 如果定时器还在，说明前一次延迟执行还没有完成
+            return false;
+        }
+        timeoutId = setTimeout(function () {
+            clearTimeout(timeoutId);
+            timeoutId = null
+            fn()
+        }, 1000)
+    });
+
+</script>
+</body>
+</html>
